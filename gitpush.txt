@@ -1,0 +1,12 @@
+Microsoft Windows [Version 10.0.20348.3807]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\workspace>git init
+Reinitialized existing Git repository in C:/workspace/.git/
+
+C:\workspace>git push origin main
+Everything up-to-date
+
+C:\workspace>git add .
+warning: in the working copy of '.metadata/.log', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt', LF will be replaced by CRLF the next time Git touches it

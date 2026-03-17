@@ -1,0 +1,11 @@
+
+public class Dog extends Animal {
+	String breed;
+	
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+
+	}
+
+}
