@@ -10,3 +10,6 @@ Everything up-to-date
 C:\workspace>git add .
 warning: in the working copy of '.metadata/.log', LF will be replaced by CRLF the next time Git touches it
 warning: in the working copy of '.metadata/.plugins/org.eclipse.jdt.core/savedIndexNames.txt', LF will be replaced by CRLF the next time Git touches it
+
+
+FILE EDITED
