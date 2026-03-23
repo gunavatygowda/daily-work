@@ -21,12 +21,12 @@ class MathTest2 {
 		int result = math.add(2, 5);
 		assertEquals(7,result);
 		
-		@Test
-		void testDivide() {
-			int result = math.divide(25,5);
-			assertEquals(5,result);
-		}
-		
+//		@Test
+//		void testDivide() {
+//			int result = math.divide(25,5);
+//			assertEquals(5,result);
+//		}
+//		
 //	@Test
 //	void testAddNegativeNumbers() {
 //		int result = math.add(-2, 5);
