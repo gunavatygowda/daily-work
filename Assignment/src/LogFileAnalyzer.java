@@ -2,9 +2,18 @@ import java.io.*;
 import java.util.*;
 public class LogFileAnalyzer {
     public static void main(String[] args) {
+<<<<<<< HEAD
         Map<String, Integer> map = new HashMap<>();
+=======
+>>>>>>> feature1
         String fileName = "system.log";
-
+        Map<String, Integer> result = analyzeLogFile(fileName);
+        for (Map.Entry<String, Integer> entry : result.entrySet()) {
+            System.out.println(entry.getKey() + ": " + entry.getValue());
+        }
+    }
+    public static Map<String, Integer> analyzeLogFile(String fileName) {
+        Map<String, Integer> map = new HashMap<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader(fileName));
             String line;
@@ -16,16 +25,11 @@ public class LogFileAnalyzer {
                 }
             }
             br.close();
-
         } catch (FileNotFoundException e) {
             System.out.println("Error: Log file not found");
-            return;
         } catch (IOException e) {
             System.out.println("Error reading file: " + e.getMessage());
-            return;
         }
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
+        return map;
     }
 }

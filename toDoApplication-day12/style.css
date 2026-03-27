@@ -1,0 +1,25 @@
+body {
+    font-family: Arial;
+    background: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.app {
+    background: green;
+    padding: 20px;
+    width: 300px;
+    border-radius: 10px;
+}
+
+li {
+    display: flex;
+    justify-content: space-between;
+    color: black;
+}
+
+.completed {
+    text-decoration: line-through;
+    color: gray;
+}
