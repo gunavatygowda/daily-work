@@ -7,19 +7,33 @@ body {
 }
 
 .app {
-    background: green;
+    background: pink;
     padding: 20px;
-    width: 300px;
+    width: 350px;
     border-radius: 10px;
 }
 
-li {
-    display: flex;
-    justify-content: space-between;
-    color: black;
+input {
+    margin: 5px 0;
+    padding: 5px;
 }
+
+li {
+    display: grid;
+    grid-template-columns: 1fr 80px 120px 80px;
+    align-items: center;
+    margin: 5px 0;
+}
+ .error{
+            color: #e74c3c;
+        }
 
 .completed {
     text-decoration: line-through;
     color: gray;
+}
+
+button {
+    margin: 2px;
+    cursor: pointer;
 }

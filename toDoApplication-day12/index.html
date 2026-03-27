@@ -9,9 +9,9 @@
 <body>
     <div class="app">
         <h2>Todo App</h2>
-
-        <input type="text" id="todo-input" placeholder="Enter task">
+        <input type="text" onkeyup="validate(event)" id="todo-input" placeholder="Enter task...">
         <input type="text" id="time-input" placeholder="Time (e.g. 2h)">
+        <div class="error" id="error" style="display:none;">Name is mandatory</div>
 
         <label>
             <input type="radio" name="priority" value="Urgent"> Urgent
