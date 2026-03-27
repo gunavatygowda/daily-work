@@ -11,10 +11,23 @@
         <h2>Todo App</h2>
 
         <input type="text" id="todo-input" placeholder="Enter task">
+        <input type="text" id="time-input" placeholder="Time (e.g. 2h)">
+
+        <label>
+            <input type="radio" name="priority" value="Urgent"> Urgent
+        </label>
+        <label>
+            <input type="radio" name="priority" value="Non-Urgent" checked> Non-Urgent
+        </label>
+
+        <br><br>
+
         <button onclick="addTodo()">Add</button>
+        <button onclick="sortTodos()">Sort A-Z</button>
 
         <ul id="todo-list"></ul>
     </div>
+
     <script src="app.js"></script>
 </body>
 </html>
