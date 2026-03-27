@@ -1,39 +1,81 @@
-body {
-    font-family: Arial;
-    background: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    margin-top: 50px;
-}
-
-.app {
-    background: pink;
-    padding: 20px;
-    width: 350px;
-    border-radius: 10px;
-}
-
-input {
-    margin: 5px 0;
-    padding: 5px;
-}
-
-li {
-    display: grid;
-    grid-template-columns: 1fr 80px 120px 80px;
-    align-items: center;
-    margin: 5px 0;
-}
- .error{
-            color: #e74c3c;
+  * {
+            box-sizing: border-box;
         }
 
-.completed {
-    text-decoration: line-through;
-    color: gray;
-}
+        body {
+            font-family: Arial, sans-serif;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 140vh;
+            margin: 0;
+        }
 
-button {
-    margin: 2px;
-    cursor: pointer;
-}
+        .app {
+            background: #fff;
+            padding: 20px;
+            width: 600px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        button {
+            padding: 8px 12px;
+            border: none;
+            background: #4CAF50;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+        .error{
+            color: #e74c3c;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px;
+            border-bottom: 1px solid #eee;
+        }
+
+        li.completed span {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        .actions button {
+            margin-left: 5px;
+            background: #e74c3c;
+        }
+
+        .actions button.complete {
+            background: #3498db;
+        }
