@@ -1,4 +1,6 @@
 **/*.class
 **/*.classpath
 
+node_modules/
 /.metadata/
+
