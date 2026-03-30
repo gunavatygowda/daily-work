@@ -1,18 +1,25 @@
 let todos = JSON.parse(localStorage.getItem('todos')) || [];
-const errorDiv = document.getElementById('error');
+
+let errorDiv;
+
+window.onload = function () {
+    errorDiv = document.getElementById('error');
+    renderTodos();
+};
+
 function saveTodos() {
     localStorage.setItem('todos', JSON.stringify(todos));
 }
+
 function sort() {
-    todos.sort((e1, e2) => {
-        return e1.text.localeCompare(e2.text);
-    })
-    console.log(todos);
+    todos.sort((a, b) => a.text.localeCompare(b.text));
     renderTodos();
 }
-function validate() {
+
+function validate(event) {
     errorDiv.style.display = (event.target.value.trim() !== '') ? 'none' : 'inline';
 }
+
 function renderTodos() {
     const list = document.getElementById('todo-list');
     list.innerHTML = '';
@@ -22,12 +29,13 @@ function renderTodos() {
         if (todo.completed) li.classList.add('completed');
 
         li.innerHTML = `
+            <span>
+                ${todo.text} 
+                (${todo.time || "No Time"}) 
+                - ${todo.priority || "No Priority"}
+            </span>
             <div>
-                <strong>${index + 1}. ${todo.text}</strong><br>
-                <small>${todo.date}</small>
-            </div>
-            <div class="actions">
-                <button class="complete" onclick="toggleComplete(${index})">✔</button>
+                <button onclick="toggleComplete(${index})">✔</button>
                 <button onclick="deleteTodo(${index})">✖</button>
             </div>
         `;
@@ -35,34 +43,29 @@ function renderTodos() {
         list.appendChild(li);
     });
 }
+
 function addTodo() {
     const input = document.getElementById('todo-input');
-    const dateInput = document.getElementById('date-input');
+    const timeInput = document.getElementById('time-input');
+    const priorityInput = document.getElementById('priority');
+
     const text = input.value.trim();
+    const time = timeInput.value;
+    const priority = priorityInput.value;
 
-    if (text === '' || text.startsWith('-')) {
-        errorDiv.style.display = 'inline';
-        errorDiv.innerText = "Invalid task";
-        return;
-    }
-
-    errorDiv.style.display = 'none';
-
-    let selectedDate = dateInput.value;
-    let now = selectedDate ? new Date(selectedDate) : new Date();
-    const day = String(now.getDate()).padStart(2, '0');
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const year = String(now.getFullYear()).slice(-2);
-
-    const formattedDate = `${day}-${month}-${year}`;
+    if (text === '') return;
 
     todos.push({
-        text,
-        completed: false,
-        date: formattedDate
+        text: text,
+        time: time,
+        priority: priority,
+        completed: false
     });
+
     input.value = '';
-    dateInput.value = '';
+    timeInput.value = '';
+    priorityInput.value = '';
+
     saveTodos();
     renderTodos();
 }
@@ -78,4 +81,3 @@ function toggleComplete(index) {
     saveTodos();
     renderTodos();
 }
-renderTodos();

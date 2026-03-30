@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
+
     <div class="app">
         <h2>Todo App</h2>
-        <input type="text" onkeyup="validate(event)" id="todo-input" placeholder="Enter task...">
-        <input type="text" id="time-input" placeholder="Time (e.g. 2h)">
 
-        <label>
-            <input type="radio" name="priority" value="Urgent"> Urgent
-        </label>
-        <label>
-            <input type="radio" name="priority" value="Non-Urgent" checked> Non-Urgent
-        </label>
+        <div class="input-group">
+            <input type="text" id="todo-input" onkeyup="validate(event)" placeholder="Enter task...">
+            <input type="time" id="time-input">
 
-        <br><br>
+            <select id="priority">
+                <option value="">Select priority</option>
+                <option value="urgent">Urgent</option>
+                <option value="not-urgent">Not Urgent</option>
+            </select>
 
-        <button onclick="addTodo()">Add</button>
-        <button onclick="sortTodos()">Sort A-Z</button>
-        <input type="date" id="date-input">
+            <button onclick="addTodo()">Add</button>
+            <button onclick="sort()">Sort by name</button>
+
+            <div class="error" id="error">Name is mandatory</div>
+        </div>
 
         <ul id="todo-list"></ul>
     </div>
 
     <script src="app.js"></script>
+
 </body>
+
 </html>
