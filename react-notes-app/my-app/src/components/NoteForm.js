@@ -1,32 +1,15 @@
-import axios from "axios";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 function NoteForm({ addNote }) {
   const [note, setNote] = useState({
-    title: "",
-    status: "open",
-    date: "" 
+    title: "",status: "open", date:""
   });
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!note.title.trim()) return;
-    sendPostRequest(note);
-    addNote({
-      title: note.title.trim(),
-      status: note.status,
-      date: note.date
+    addNote({title: note.title.trim(),status: note.status, date: note.date
     });
-    setNote({ title: "", status: "open", date: "" });
-  };
-  const sendPostRequest = (note) => {
-    axios.post("http://localhost:3000/notes", note, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then(res => console.log(res.data))
-    .catch(err => console.log(err));
+    setNote({ title: "", status: "open", date:""});
   };
   return (
     <form onSubmit={handleSubmit}>
@@ -43,18 +26,17 @@ function NoteForm({ addNote }) {
           type="checkbox"
           checked={note.status === "closed"}
           onChange={(e) =>
-            setNote({...note,status: e.target.checked ? "closed" : "open",
-            })
+            setNote({...note,status: e.target.checked ? "closed" : "open",})
           }
         />
-      </label>
-      <input
+        <input
         type="date"
         value={note.date}
         onChange={(e) =>
-          setNote({ ...note, date: e.target.value })
+            setNote({...note,date:e.target.value})
         }
-      />
+        />
+      </label>
       <button>Add</button>
     </form>
   );

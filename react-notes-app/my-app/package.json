@@ -1,5 +1,5 @@
 {
-  "name": "app1",
+  "name": "my-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "set PORT=3001 && react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^6.9.1"
+    "@testing-library/jest-dom": "github:testing-library/jest-dom",
+    "import": "^0.0.6"
   }
 }

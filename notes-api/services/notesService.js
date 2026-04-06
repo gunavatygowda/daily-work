@@ -10,15 +10,15 @@ async function getNoteById(id) {
   const note = notes.find((note) => note.id == id);
   return note;
 }
-async function createNote(title, content) {
+async function createNote(title, content){
   const notes = await getNotes();
-  const newNote = {
-    id: Date.now(),
-    title,
-    content,
-    status: "created",
-    createdAt: new Date().toISOString(),
-  };
+ const newNote = {
+  id: Date.now(),
+  title,
+  content: content || "",
+  status: "created",
+  createdAt: new Date().toISOString(),
+};
   notes.push(newNote);
   await saveNotes(notes);
   return newNote;
