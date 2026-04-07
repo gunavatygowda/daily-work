@@ -4,6 +4,8 @@ import NoteForm from "./components/NoteForm";
 import NoteList from "./components/NoteList";
 import Navbar from "./components/Navbar";
 import "./App.css";
+import StatusBarChart from "./components/StatusBarChart";
+
 
 function App() {
   const [notes, setNotes] = useState([]);
@@ -35,9 +37,15 @@ if (sortType === "priority") {
         <div className="card">
           <Routes>
             <Route path="/" element={<NoteForm addNote={addNote} />} />
-           <Route path="/notes"
-           element={<NoteList notes={filterNotes} deleteNote={deleteNote} search={search} setSearch={setSearch}  setSortType={setSortType}
-    />
+       <Route
+       path="/notes"
+       element={ <>
+      <NoteList
+        notes={filterNotes} deleteNote={deleteNote} search={search}
+        setSearch={setSearch} setSortType={setSortType}
+      />
+      <StatusBarChart notes={notes} />  
+    </>
   }
 />
 </Routes></div>
