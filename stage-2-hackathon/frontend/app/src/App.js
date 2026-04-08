@@ -12,28 +12,22 @@ function App() {
       confirmAnswer: ""
     }))
   );
-
   const [errors, setErrors] = useState(Array(5).fill(""));
   const [duplicateError, setDuplicateError] = useState("");
-
   useEffect(() => {
     axios
       .get("http://localhost:5000/api/security")
       .then((res) => setQuestions(res.data))
       .catch((err) => console.error(err));
   }, []);
-
   const handleChange = (index, field, value) => {
     const updated = [...formData];
     updated[index][field] = value;
     setFormData(updated);
   };
-
   const handleSubmit = () => {
     let newErrors = Array(5).fill("");
     let hasError = false;
-
-    // ✅ field validation
     formData.forEach((item, i) => {
       if (
         !item.questionId ||
@@ -48,28 +42,22 @@ function App() {
       }
     });
 
-    // ✅ duplicate check
     const selected = formData.map((item) => item.questionId);
     const unique = new Set(selected);
-
     if (unique.size !== selected.length) {
       setDuplicateError("Duplicate questions not allowed");
       hasError = true;
     } else {
       setDuplicateError("");
     }
-
     setErrors(newErrors);
-
     if (hasError) return;
 
-    // ✅ format
     const formattedData = formData.map((item, i) => ({
       questionId: item.questionId ||'Q${i + 1}',
       answer: item.answer.trim(),
       confirmAnswer: item.confirmAnswer.trim()
     }));
-
     axios
       .post("http://localhost:5000/api/security", formattedData)
       .then(() => {
@@ -81,13 +69,11 @@ function App() {
   return (
     <div className="form-container">
       <h2>Security Questions</h2>
-
       <div className="header">
         <span>Question</span>
         <span>Answer</span>
         <span>Confirm Answer</span>
       </div>
-
       {formData.map((item, index) => (
         <div key={index}>
           <QuestionCard
@@ -100,14 +86,11 @@ function App() {
           {errors[index] && <div className="error">{errors[index]}</div>}
         </div>
       ))}
-
       {duplicateError && <div className="error">{duplicateError}</div>}
-
       <button className="submit-btn" onClick={handleSubmit}>
         Submit
       </button>
     </div>
   );
 }
-
 export default App;

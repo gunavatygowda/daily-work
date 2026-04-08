@@ -6,33 +6,23 @@ function QuestionCard({ index, questions, data, handleChange, formData }) {
 
   return (
     <div className="row">
-
-      {/* Dropdown */}
       <select
         value={data.questionId}
         onChange={(e) =>
-          handleChange(index, "questionId", e.target.value)
-        }
-      >
+          handleChange(index, "questionId", e.target.value)}>
         <option value="">Select Question</option>
-
         {(questions || []).map((q, i) => {
           const value = q.id ||`Q${i + 1}`;
-
-          const isSelectedElsewhere = (formData || []).some(
-            (item, idx) =>
+          const isSelectedElsewhere = (formData || []).some((item, idx) =>
               idx !== index && item.questionId === value
           );
 
           return (
             <option key={i} value={value} disabled={isSelectedElsewhere}>
               {q.question}
-            </option>
-          );
+            </option>);
         })}
       </select>
-
-      {/* Answer */}
       <div>
         <input
           type={showAnswer ? "text" : "password"}
@@ -46,8 +36,6 @@ function QuestionCard({ index, questions, data, handleChange, formData }) {
           {showAnswer ? "Hide" : "Show"}
         </button>
       </div>
-
-      {/* Confirm */}
       <div>
         <input
           type={showConfirm ? "text" : "password"}
@@ -61,9 +49,7 @@ function QuestionCard({ index, questions, data, handleChange, formData }) {
           {showConfirm ? "Hide" : "Show"}
         </button>
       </div>
-
     </div>
   );
 }
-
 export default QuestionCard;
