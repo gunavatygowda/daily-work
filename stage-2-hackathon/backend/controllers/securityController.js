@@ -4,6 +4,11 @@ const questionsPath = path.join(__dirname, '../data/questions.json');
 const answersPath = path.join(__dirname, '../data/answers.json');
 
 exports.handleSecurity = (req, res) => {
+  if (!req.body || Object.keys(req.body).length === 0) {
+  return res.status(400).json({
+    message: "Request body is empty"
+  });
+}
   if (req.method === "GET") {
     fs.readFile(questionsPath, "utf8", (err, data) => {
       if (err) return res.status(500).json({ error: "Cannot read questions" });

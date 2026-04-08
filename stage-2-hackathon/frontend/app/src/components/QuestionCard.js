@@ -12,7 +12,7 @@ function QuestionCard({ index, questions, data, handleChange, formData }) {
           handleChange(index, "questionId", e.target.value)}>
         <option value="">Select Question</option>
         {(questions || []).map((q, i) => {
-          const value = q.id ||`Q${i + 1}`;
+          const value = q.question;
           const isSelectedElsewhere = (formData || []).some((item, idx) =>
               idx !== index && item.questionId === value
           );
