@@ -12,40 +12,70 @@ function App() {
       confirmAnswer: ""
     }))
   );
+
   const [errors, setErrors] = useState(Array(5).fill(""));
+  const [duplicateError, setDuplicateError] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/security")
-      .then(res => setQuestions(res.data))
-      .catch(err => console.error(err));
+    axios
+      .get("http://localhost:5000/api/security")
+      .then((res) => setQuestions(res.data))
+      .catch((err) => console.error(err));
   }, []);
 
   const handleChange = (index, field, value) => {
-    const updatedData = formData.map((item, i) =>
-      i === index ? { ...item, [field]: value } : item
-    );
-    setFormData(updatedData);
+    const updated = [...formData];
+    updated[index][field] = value;
+    setFormData(updated);
   };
 
   const handleSubmit = () => {
     let newErrors = Array(5).fill("");
+    let hasError = false;
 
+    // ✅ field validation
     formData.forEach((item, i) => {
-      if (!item.questionId || !item.answer || !item.confirmAnswer) {
+      if (
+        !item.questionId ||
+        !item.answer.trim() ||
+        !item.confirmAnswer.trim()
+      ) {
         newErrors[i] = "Fill all fields";
+        hasError = true;
       } else if (item.answer !== item.confirmAnswer) {
         newErrors[i] = "Answers do not match";
+        hasError = true;
       }
     });
 
+    // ✅ duplicate check
+    const selected = formData.map((item) => item.questionId);
+    const unique = new Set(selected);
+
+    if (unique.size !== selected.length) {
+      setDuplicateError("Duplicate questions not allowed");
+      hasError = true;
+    } else {
+      setDuplicateError("");
+    }
+
     setErrors(newErrors);
 
-    const hasError = newErrors.some(e => e !== "");
     if (hasError) return;
 
-    axios.post("http://localhost:5000/api/security", formData)
-      .then(() => alert("Submitted Successfully"))
-      .catch(err => console.error(err));
+    // ✅ format
+    const formattedData = formData.map((item, i) => ({
+      questionId: item.questionId ||'Q${i + 1}',
+      answer: item.answer.trim(),
+      confirmAnswer: item.confirmAnswer.trim()
+    }));
+
+    axios
+      .post("http://localhost:5000/api/security", formattedData)
+      .then(() => {
+        setDuplicateError("Submitted Successfully");
+      })
+      .catch((err) => console.error(err));
   };
 
   return (
@@ -65,12 +95,13 @@ function App() {
             questions={questions}
             data={item}
             handleChange={handleChange}
+            formData={formData}
           />
-          {errors[index] && (
-            <div className="error">{errors[index]}</div>
-          )}
+          {errors[index] && <div className="error">{errors[index]}</div>}
         </div>
       ))}
+
+      {duplicateError && <div className="error">{duplicateError}</div>}
 
       <button className="submit-btn" onClick={handleSubmit}>
         Submit

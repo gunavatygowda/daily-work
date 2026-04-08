@@ -1,46 +1,69 @@
-import { useState } from "react";
+import React, { useState } from "react";
 
-export default function QuestionCard({ index, questions, data, handleChange }) {
+function QuestionCard({ index, questions, data, handleChange, formData }) {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
   return (
     <div className="row">
+
+      {/* Dropdown */}
       <select
-        value={data.questionId || ""}
-        onChange={(e) => handleChange(index, "questionId", e.target.value)}
+        value={data.questionId}
+        onChange={(e) =>
+          handleChange(index, "questionId", e.target.value)
+        }
       >
         <option value="">Select Question</option>
-        {questions.map((q, i) => (
-          <option key={i} value={q.question}>
-            {q.question}
-          </option>
-        ))}
+
+        {(questions || []).map((q, i) => {
+          const value = q.id ||`Q${i + 1}`;
+
+          const isSelectedElsewhere = (formData || []).some(
+            (item, idx) =>
+              idx !== index && item.questionId === value
+          );
+
+          return (
+            <option key={i} value={value} disabled={isSelectedElsewhere}>
+              {q.question}
+            </option>
+          );
+        })}
       </select>
 
-      <div className="input-box">
+      {/* Answer */}
+      <div>
         <input
           type={showAnswer ? "text" : "password"}
-          placeholder="Answer"
+          placeholder="Answer"  
           value={data.answer}
-          onChange={(e) => handleChange(index, "answer", e.target.value)}
+          onChange={(e) =>
+            handleChange(index, "answer", e.target.value)
+          }
         />
-        <button onClick={() => setShowAnswer(!showAnswer)}>
+        <button type="button" onClick={() => setShowAnswer(!showAnswer)}>
           {showAnswer ? "Hide" : "Show"}
         </button>
       </div>
 
-      <div className="input-box">
+      {/* Confirm */}
+      <div>
         <input
           type={showConfirm ? "text" : "password"}
-          placeholder="Confirm"
+          placeholder="Confirm"  
           value={data.confirmAnswer}
-          onChange={(e) => handleChange(index, "confirmAnswer", e.target.value)}
+          onChange={(e) =>
+            handleChange(index, "confirmAnswer", e.target.value)
+          }
         />
-        <button onClick={() => setShowConfirm(!showConfirm)}>
+        <button type="button" onClick={() => setShowConfirm(!showConfirm)}>
           {showConfirm ? "Hide" : "Show"}
         </button>
       </div>
+
     </div>
   );
 }
+
+export default QuestionCard;
