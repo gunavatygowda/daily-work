@@ -1,0 +1,27 @@
+[
+  {
+    "questionId": "what is your maiden's name?",
+    "answer": "asha",
+    "confirmAnswer": "asha"
+  },
+  {
+    "questionId": "what is your pet name?",
+    "answer": "123",
+    "confirmAnswer": "123"
+  },
+  {
+    "questionId": "where did you reside before 2010?",
+    "answer": "890",
+    "confirmAnswer": "890"
+  },
+  {
+    "questionId": "what is your date of birth?",
+    "answer": "567",
+    "confirmAnswer": "567"
+  },
+  {
+    "questionId": "what was your favourite hobby?",
+    "answer": "000",
+    "confirmAnswer": "000"
+  }
+]
