@@ -19,14 +19,18 @@ exports.handleSecurity = (req, res) => {
   if (!answers || !Array.isArray(answers) || answers.length === 0) {
     return res.status(400).json({ error: "Invalid or empty data" });
   }
-  for (let item of answers) {
-    if (!item.questionId || !item.answer || !item.confirmAnswer) {
-      return res.status(400).json({ error: "Missing fields" });
-    }
-    if (item.answer !== item.confirmAnswer) {
-      return res.status(400).json({ error: "Answers do not match" });
-    }
-  }
+
+const MIN = 3;
+const MAX = 50;
+for (let item of answers) {
+  if (!item.questionId || !item.answer || !item.confirmAnswer) {
+    return res.status(400).json({ error: "Missing fields" });}
+  if (item.answer !== item.confirmAnswer) {
+    return res.status(400).json({ error: "Answers do not match" });}
+  if (item.answer.length < MIN || item.answer.length > MAX) {
+    return res.status(400).json({ error: `Answer must be between ${MIN} and ${MAX} characters`
+    });
+  }}
   const questionIds = answers.map(item => item.questionId);
   const uniqueIds = new Set(questionIds);
   if (uniqueIds.size !== questionIds.length) {
