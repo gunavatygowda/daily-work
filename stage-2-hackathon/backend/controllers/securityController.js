@@ -2,7 +2,6 @@ const fs = require('fs');
 const path = require('path');
 const questionsPath = path.join(__dirname, '../data/questions.json');
 const answersPath = path.join(__dirname, '../data/answers.json');
-
 exports.handleSecurity = (req, res) => {
   if (!req.body || Object.keys(req.body).length === 0) {
   return res.status(400).json({
