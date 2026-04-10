@@ -9,23 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class SpringBasicsApplication {
-//	private final NoteController noteController;
-//	
-//	public SpringBasicsApplication(NoteController noteController) {
-//		this.noteController = noteController;
-//	}
-//
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context = SpringApplication.run(SpringBasicsApplication.class, args);
-//		ConfigurableApplicationContext context1 = SpringApplication.run(SpringBasicsApplication.class, args);
-		NoteController service = context.getBean(NoteController.class);
-//		NoteController controller1 = context.getBean(NoteController.class);
-	System.out.println(service);
-//		System.out.println(controller1);
+		 SpringApplication.run(SpringBasicsApplication.class, args);
 	}
-	@Bean
-	NoteController noteController() {
-		return new NoteController();
-	}
-	
 }
