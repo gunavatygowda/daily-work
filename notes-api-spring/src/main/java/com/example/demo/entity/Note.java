@@ -1,8 +1,11 @@
 package com.example.demo.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
-
+@Entity
 public class Note {
+	@Id
 	long id;
 	@NotBlank
 	String title;
