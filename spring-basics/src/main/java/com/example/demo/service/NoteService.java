@@ -22,13 +22,19 @@ public class NoteService {
 	EmailService emailService;
 	
 	public Iterable<Order1> getOrder() {
+		try {
+			Thread.sleep(1020);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return order1Repository.findAll();
 	}
 	@Transactional(rollbackFor = Exception.class, noRollbackFor = {IOException.class})
-	public Integer addOrder(Order1 order1) throws IOException {
+	public Integer addOrder(Order1 order1) {
 		paymentService.processPayment();
 		order1Repository.save(order1);
-		emailService.send(order1.getId());
+		//emailService.send(order1.getId());
 		 
 		 return order1.getId();
 	}

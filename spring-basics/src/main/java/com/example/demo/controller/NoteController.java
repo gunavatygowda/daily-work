@@ -49,7 +49,7 @@ public class NoteController {
 		return noteService.getOrderById(id);
 }
 	@PostMapping
-	Integer createOrder( @RequestBody @Valid Order1 order1) throws IOException {
+	Integer createOrder( @RequestBody @Valid Order1 order1 )  {
 		System.out.println(order1.getPrice());
 		return noteService.addOrder(order1);
 	}
