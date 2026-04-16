@@ -24,19 +24,15 @@ public class Order1 {
 	@OneToMany(mappedBy = "order1", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
 	private List<OrderLine> orderLines = new ArrayList<>();
-
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public List<OrderLine> getOrderLines() {
 		return orderLines;
 	}
-
 	public void setOrderLines(List<OrderLine> orderLines) {
 		this.orderLines = orderLines;
 	}

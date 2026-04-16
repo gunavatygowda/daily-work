@@ -17,13 +17,13 @@ public class OrderLine {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
 	@NotBlank
 	private String item;
-
 	@Min(1)
 	private float price;
-
+	@Min(1)
+	private int quantity;  
+	
 	@ManyToOne
 	@JoinColumn(name = "order_fk")
 	@JsonBackReference
@@ -32,15 +32,12 @@ public class OrderLine {
 	public Integer getId() {
 		return id;
 	}
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 	public String getItem() {
 		return item;
 	}
-
 	public void setItem(String item) {
 		this.item = item;
 	}
@@ -48,11 +45,15 @@ public class OrderLine {
 	public float getPrice() {
 		return price;
 	}
-
 	public void setPrice(float price) {
 		this.price = price;
 	}
-
+	public int getQuantity() {
+	    return quantity;
+	}
+	public void setQuantity(int quantity) {
+	    this.quantity = quantity;
+	}
 	public Order1 getOrder1() {
 		return order1;
 	}

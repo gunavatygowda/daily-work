@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.entity.Order1;
+import com.example.demo.entity.OrderLine;
 import com.example.demo.repository.Order1Repository;
 
 //@Component
@@ -39,8 +40,27 @@ public class NoteService {
 
 	@Transactional(rollbackFor = Exception.class, noRollbackFor = {}) // for no rollback to happen
 	public Integer addOrder(Order1 order1) {
-		Order1 saved = order1Repository.save(order1);
-		return saved.getId();
+
+		if (order1.getOrderLines() == null || order1.getOrderLines().isEmpty()) {
+			throw new IllegalArgumentException("Order lines cannot be empty");
+		}
+
+		for (OrderLine line : order1.getOrderLines()) {
+
+			if (line.getItem() == null || line.getItem().trim().isEmpty()) {
+				throw new IllegalArgumentException("Item name invalid");
+			}
+
+			if (line.getPrice() <= 0) {
+				throw new IllegalArgumentException("Price must be > 0");
+			}
+
+			if (line.getQuantity() < 1) {
+				throw new IllegalArgumentException("Quantity must be >= 1");
+			}
+		}
+
+		return 1;
 	}
 
 	public Optional<Order1> getOrderById(Integer id) {
